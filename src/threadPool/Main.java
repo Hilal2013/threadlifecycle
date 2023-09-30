@@ -2,23 +2,39 @@ package threadPool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Main {
     public static void main(String[] args) {
-        ExecutorService executorService= Executors.newFixedThreadPool(3);
-        DownloadProcessor downloadProcessor=new DownloadProcessor("File1");
-        DownloadProcessor downloadProcessor2=new DownloadProcessor("File2");
-        DownloadProcessor downloadProcessor3=new DownloadProcessor("File3");
-        DownloadProcessor downloadProcessor4=new DownloadProcessor("File4");
-        DownloadProcessor downloadProcessor5=new DownloadProcessor("File5");
-        executorService.submit(downloadProcessor);
-        executorService.submit(downloadProcessor2);
-        executorService.submit(downloadProcessor3);
-        executorService.submit(downloadProcessor4);
-        executorService.submit(downloadProcessor5);
-executorService.shutdown();
 
-     //   downloadProcessor.run();
+        ExecutorService uploadPool = Executors.newCachedThreadPool();
+        UploadProcessor uploadProcessor = new UploadProcessor("File 6");
+        UploadProcessor uploadProcessor2 = new UploadProcessor("File 7");
+        UploadProcessor uploadProcessor3 = new UploadProcessor("File 8");
+        UploadProcessor uploadProcessor4 = new UploadProcessor("File 9");
+        UploadProcessor uploadProcessor5 = new UploadProcessor("File 10");
+        UploadProcessor uploadProcessor6 = new UploadProcessor("File 11");
+        UploadProcessor uploadProcessor7 = new UploadProcessor("File 12");
+        UploadProcessor uploadProcessor8 = new UploadProcessor("File 13");
+        UploadProcessor uploadProcessor9 = new UploadProcessor("File 14");
+
+        uploadPool.submit(uploadProcessor);
+        uploadPool.submit(uploadProcessor2);
+        uploadPool.submit(uploadProcessor3);
+        uploadPool.submit(uploadProcessor4);
+        uploadPool.submit(uploadProcessor5);
+        uploadPool.submit(uploadProcessor6);
+        uploadPool.submit(uploadProcessor7);
+        uploadPool.submit(uploadProcessor8);
+        uploadPool.submit(uploadProcessor9);
+
+        ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) uploadPool;
+
+        System.out.println( "Available threads: " + threadPoolExecutor.getPoolSize());
+
+        uploadPool.shutdown();
+
     }
-}
+    }
+
+
